@@ -1,0 +1,17 @@
+{
+  "name": "block-hbs-helpers",
+  "version": "1.0.0",
+  "description": "A collection of handlebars helpers to use in blocking",
+  "main": "index.js",
+  "author": "Phil Whittaker",
+  "license": "MIT",
+  "devDependencies": {
+    "handlebars": "^3.0.3"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hifi-phil/block-hbs-helpers.git"
+  },
+  "homepage": "https://github.com/hifi-phil/block-hbs-helpers.git#readme"
+}
