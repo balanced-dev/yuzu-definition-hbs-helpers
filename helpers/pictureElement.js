@@ -9,6 +9,6 @@ module.exports = function (src, alt, classes, fallbackSize) {
 		breakpointArgs = args.slice(4, args.length -1);
 
 	var sources = picture.buildSourcesObj(breakpointArgs);		
-	return picture.element(src, alt, classes, sources, fallbackSize);
+	return picture.element(src, alt, undefined, classes, sources, fallbackSize);
 };
 
