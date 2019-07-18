@@ -1,5 +1,4 @@
-var Handlebars = require('handlebars'),
-	picture = require('./pictureHelpers.js');
+var picture = require('./pictureHelpers.js');
 
 module.exports = function (src) {	
 
