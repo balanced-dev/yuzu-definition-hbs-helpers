@@ -1,3 +1,4 @@
+var fs = require('fs');
 var helpers = {};
 helpersDir = fs.readdirSync(__dirname +'/helpers/');
 helpersDir.forEach(function(helper) {
