@@ -1,10 +1,8 @@
-var Handlebars = require('handlebars');
-
 module.exports = function (path, context) {
 	path = path.replace('/','');
-	var partial = Handlebars.partials[path];
+	var partial = handlebars.partials[path];
 	if (typeof partial !== 'function') {
-		partial = Handlebars.compile(partial);
+		partial = handlebars.compile(partial);
 	}
 	return partial(context);
 };
