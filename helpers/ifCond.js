@@ -26,7 +26,7 @@ function checkCondition(v1, operator, v2) {
 }
 
 module.exports = function ifCond(v1, operator, v2, options) {
-                return checkCondition(v1, operator, v2)
-                    ? options.fn(this)
-                    : options.inverse(this);
-			};
+	return checkCondition(v1, operator, v2)
+			? options.fn(this)
+			: options.inverse(this);
+};
