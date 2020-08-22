@@ -14,8 +14,9 @@ function objectClone(src) {
 
 // Filter all default settings from parameters
 function getImageProcessorSettings(obj) {
-    for(var i = 0, len = configSettings.length; i < len; i++) {
-        obj[configSettings[i]] = undefined;
+    var config = configSettings();
+    for(var i = 0, len = config.length; i < len; i++) {
+        obj[config[i]] = undefined;
     }
     return obj;
 }
@@ -53,6 +54,7 @@ function createSourceTag(mediaCondition, imageSrc, settings, tagClose) {
         if(highDensitySettings.width) {
             highDensitySettings.width = highDensitySettings.width * settings.highDensityDimensionMultiplier
         }
+        highDensitySettings.quality = highDensitySettings.highDensityQuality;
         outputHTML += imageSrcSeparator + imageSrc + createImageQueryString(highDensitySettings) + ' ' + settings.highDensityDisplayDensity;
     }
     
@@ -64,7 +66,8 @@ function createSourceTag(mediaCondition, imageSrc, settings, tagClose) {
 }
 
 // Define settings
-const defaultSettings = {
+const defaultSettings = function() {
+    return {
         quality: 80,                        // Quality of non-webP image
         createWebP: true,                   // Flag to toggle creation of webP source
         webPQuality: 85,                    // Quality of webP image
@@ -73,9 +76,11 @@ const defaultSettings = {
         highDensityDimensionMultiplier: 2,  // Factor by which image dimensions are increased by for pixel dense displays
         highDensityQuality: 50,             // Quality of non-webP images on pixel dense displays
         highDensityWebPQuality: 60          // Quality of webP images on pixel dense displays
-    },
-    // Define properties which are not used by image processor to be filtered out of query string
-    configSettings = [
+    };
+};
+// Define properties which are not used by image processor to be filtered out of query string
+const configSettings = function(){
+    return [
         'createWebP',
         'webPQuality',
         'createHighDensityDisplay',
@@ -84,14 +89,16 @@ const defaultSettings = {
         'highDensityQuality',
         'highDensityWebPQuality'
     ];
+}; 
 
 module.exports = function(mediaCondition, imageSrc, options) {
     var userSettings = options.hash,
         settings = {},
-        sourceTagsHTML = '';
+        sourceTagsHTML = '',
+        defaults = defaultSettings();
 
     // Allows overriding of any settings and/or addition of extra settings to be used by the image processor
-    settings = extend(defaultSettings, userSettings); 
+    settings = extend(defaults, userSettings); 
 
     // Create webP first        
     if(settings.createWebP) {
