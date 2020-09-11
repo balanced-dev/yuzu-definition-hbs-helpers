@@ -1,6 +1,6 @@
 {
   "name": "yuzu-definition-hbs-helpers",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "A collection of handlebars helpers that are used in the Yuzu Definition pattern library",
   "main": "index.js",
   "author": "Phil Whittaker",
