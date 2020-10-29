@@ -1,6 +1,6 @@
 module.exports = function (path, context, scope) {
 	path = path.replace('/','');
-	var partial = handlebars.partials[path];
+	var partial = handlebars.markup[path];
 
 	if(scope) {
 		if(context._endpoint) {
