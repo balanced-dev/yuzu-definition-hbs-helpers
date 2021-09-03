@@ -11,7 +11,9 @@ module.exports = function (path, context, scope) {
 				partial = partial.replace(/<\w*\s/, '$&data-endpoint=\''+ context._endpoint +'\' ');
 			}
 			else if (context) {
-				partial = partial.replace(/<\w*\s/, '$&data-context=\''+ JSON.stringify(context) +'\' ');
+				let stringContext = JSON.stringify(context);
+				stringContext = stringContext.replace(/'/g, "&#39;");
+				partial = partial.replace(/<\w*\s/, '$&data-context=\''+ stringContext +'\' ');
 			}
 		}
 	}
