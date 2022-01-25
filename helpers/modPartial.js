@@ -1,12 +1,23 @@
-module.exports = function (path, context) {
-	path = path.replace('/','');
+module.exports = function (path, context, options) {
+	path = path.replace('/', '');
+	
 	var partial = handlebars.partials[path];
 	if (typeof partial !== 'function') {
 		partial = handlebars.compile(partial);
 	}
-	if(context) {
+	
+	if (context) {
 		// Assume every parameter after path + context are modifier classes (excluding last = options object)
-		context._modifiers = Array.prototype.slice.call(arguments,2,-1);
+		context._modifiers = Array.prototype.slice.call(arguments, 2, -1);
 	}
-	return partial(context);
-};
+
+	// Assume that last parameter is an options object
+	let hash = arguments[arguments.length - 1].hash;
+	let data = context;
+	if (typeof data === 'object') {
+		Object.keys(hash).forEach(key => {
+			data[key] = hash[key];
+		})
+	}
+	return partial(data);
+}

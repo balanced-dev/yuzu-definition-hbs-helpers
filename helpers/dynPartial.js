@@ -1,14 +1,19 @@
-module.exports = function (path, context) {
-	if(!path) {
-		console.log('_ref property not found for object '+ JSON.stringify(context, null, 2));
+module.exports = function (path, context, options) {
+	if (!path) {
 		return '';
-	}
-	else {
-		path = path.replace('/','');
+	} else {
+		let data = context;
+		if (typeof data === 'object') {
+			Object.keys(options.hash).forEach(key => {
+				data[key] = options.hash[key];
+			})
+		}
+		path = path.replace('/', '');
 		var partial = handlebars.partials[path];
 		if (typeof partial !== 'function') {
 			partial = handlebars.compile(partial);
 		}
-		return partial(context);
+
+		return partial(data);
 	}
 };
