@@ -1,7 +1,17 @@
+const handlebars = require("handlebars");
 module.exports = function (path, context, options) {
 	path = path.replace('/', '');
-	
-	var partial = handlebars.partials[path];
+	let partial,data;
+	if(path)
+	{
+		partial = handlebars.partials[path];
+		data = context;
+	}
+	else {
+		let key = Object.keys(context)[0];
+		partial = handlebars.partials[key]
+		data = context[key];
+	}
 	if (typeof partial !== 'function') {
 		partial = handlebars.compile(partial);
 	}
@@ -13,7 +23,7 @@ module.exports = function (path, context, options) {
 
 	// Assume that last parameter is an options object
 	let hash = arguments[arguments.length - 1].hash;
-	let data = context;
+	
 	if (typeof data === 'object') {
 		Object.keys(hash).forEach(key => {
 			data[key] = hash[key];
