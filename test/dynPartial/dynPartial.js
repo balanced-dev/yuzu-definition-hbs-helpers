@@ -22,9 +22,9 @@ describe('dynPartial', function () {
     
     it('given ref as path and context', function (done) {
 
-        let source = "{{{dynPartial _ref foo}}}";
+        let source = "{{{dynPartial foo._ref foo}}}";
         let partialSource = "test {{bar}}";
-        let data = {  foo: {partialName:{bar: "bar"}}};
+        let data = {  foo: {bar: "bar", "_ref": "/partialName"}};
 
         handlebars.registerPartial('partialName', partialSource)
 
