@@ -19,6 +19,19 @@ describe('dynPartial', function () {
         template(data).should.be.exactly("test bar")
         done()
     });
+    
+    it('given ref as path and context', function (done) {
+
+        let source = "{{{dynPartial _ref foo}}}";
+        let partialSource = "test {{bar}}";
+        let data = {  foo: {partialName:{bar: "bar"}}};
+
+        handlebars.registerPartial('partialName', partialSource)
+
+        let template = handlebars.compile(source);
+        template(data).should.be.exactly("test bar")
+        done()
+    });
 
     it('given empty path, context and parameter', function (done) {
 
