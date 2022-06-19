@@ -1,7 +1,7 @@
 const should = require("should");
 const rewire = require('rewire');
 const helper = require('../../helpers/dynPartial.js')
-const handlebars = require('handlebars')
+handlebars = require('handlebars')
 
 
 describe('dynPartial', function () {

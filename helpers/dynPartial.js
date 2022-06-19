@@ -1,4 +1,3 @@
-const handlebars = require("handlebars");
 module.exports = function (path, context, options) {
     let partial,data;
     if (!path) {
