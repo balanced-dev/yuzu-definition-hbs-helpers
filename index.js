@@ -1,8 +1,10 @@
-var fs = require('fs');
 var helpers = {};
-helpersDir = fs.readdirSync(__dirname +'/helpers/');
-helpersDir.forEach(function(helper) {
-	helpers[helper.replace('.js', '')] = require(__dirname +'/helpers/' + helper);
-});	
+if (typeof window === 'undefined') {
+	var fs = require('fs');
+	helpersDir = fs.readdirSync(__dirname +'/helpers/');
+	helpersDir.forEach(function(helper) {
+		helpers[helper.replace('.js', '')] = require(__dirname +'/helpers/' + helper);
+	});	
+}
 
 module.exports = helpers;
