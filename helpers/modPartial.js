@@ -2,12 +2,12 @@ module.exports = function (path, context, options) {
     let partial, data;
     if (!path) {
         let key = Object.keys(context)[0];
-        partial = handlebars.partials[key]
-        data = context[key];
+        partial = handlebars.partials[key];        
+        data = JSON.parse(JSON.stringify(context[key]));
     } else {
         path = path.replace('/', '');
-        partial = handlebars.partials[path];
-        data = context;
+        partial = handlebars.partials[path];        
+        data = JSON.parse(JSON.stringify(context));
     }
     if (typeof partial !== 'function') {
         partial = handlebars.compile(partial);

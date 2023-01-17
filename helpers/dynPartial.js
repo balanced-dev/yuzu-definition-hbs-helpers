@@ -4,10 +4,10 @@ module.exports = function (path, context, options) {
         let key = Object.keys(context)[0];
         if (!key)
             return '';
-        data = context[key]
+        data = JSON.parse(JSON.stringify(context[key]));
         partial = handlebars.partials[key];
     } else {
-        data = context;
+        data = JSON.parse(JSON.stringify(context));
 
         path = path.replace('/', '');
         partial = handlebars.partials[path];

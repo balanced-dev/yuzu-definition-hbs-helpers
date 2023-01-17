@@ -72,7 +72,7 @@ describe('dynPartial', function () {
         done()
     });
 
-    describe('given path, context and parameter', function() {
+    describe('given contexts of different data types', function(done) {
         let runs = [
             {
                 it:"string", data: "test"
@@ -115,6 +115,19 @@ describe('dynPartial', function () {
         let template = handlebars.compile(source);
 
         template(data).should.be.exactly("test bar test")
+        done()
+    });
+
+    it('given multiple renders, with paths, different contexts and parameters', function (done) {
+        let source = "{{{dynPartial 'partialName' foo param='example'}}} {{{dynPartial 'partialName' foo2}}}";
+        let partialSource = "test {{bar}} {{param}}";
+        let data = {foo: {bar: "bar"}, foo2: {bar: "bar2"}};
+
+        handlebars.registerPartial('partialName', partialSource)
+
+        let template = handlebars.compile(source);
+
+        template(data).should.be.exactly("test bar example test bar2 ")
         done()
     });
 

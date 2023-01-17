@@ -95,4 +95,17 @@ describe('modPartial', function () {
         template(data).should.be.exactly("test bar test test again")
         done()
     });
+
+    it('given multiple renders, with paths, different contexts and parameters', function (done) {
+        let source = "{{{modPartial 'partialName' foo param='example'}}} {{{modPartial 'partialName' foo2}}}";
+        let partialSource = "test {{bar}} {{param}}";
+        let data = {foo: {bar: "bar"}, foo2: {bar: "bar2"}};
+
+        handlebars.registerPartial('partialName', partialSource)
+
+        let template = handlebars.compile(source);
+
+        template(data).should.be.exactly("test bar example test bar2 ")
+        done()
+    });
 });
